@@ -77,7 +77,7 @@ function getVidLyr(trackId, title, query) {
             });
             $.ajax({
                 type: "GET",
-                url: `https://www.googleapis.com/youtube/v3/search/?part=snippet&key=AIzaSyArcX7Ict6UnR7rd0uc_D4LZZmygIVlE38&q=` + title + query,
+                url: `https://www.googleapis.com/youtube/v3/search/?part=snippet&key=API_KEY_GOOGLE&q=` + title + query,
                 dataType: "jsonp",
                 jsonpCallback: 'jsonp_callback',
                 contentType: 'application/json',
