@@ -101,12 +101,54 @@ function getVidLyr(trackId, title, query) {
     })
 }
 
+// REGISTER
+
+// REGISTER
+
+// LOGIN
+function login() {
+    $.ajax({
+        url: `http://localhost:3000/user/login`,
+        method: "POST",
+        data: $('#loginForm').serializeArray()
+    })
+        .done(response => {
+            localStorage.setItem('token', response.token)
+        })
+        .fail((jqXHR, textStatus) => {
+            console.log(jqXHR, textStatus);
+        })
+}
+// LOGIN
+
+// LOGOUT
+function logout(){
+    localStorage.removeItem('token')
+}
+// LOGOUT
+
+
 
 $(document).ready(function () {
+    $('#searchPage').hide()
     $('#search-music').submit(function () {
         search()
     })
-
+    $('#toSearchPage').on('click', () => {
+        console.log('toSearchPage');
+        $('#searchPage').show()
+        $('#loginPage').hide()
+    })
+    $('#toLoginPage').on('click', () => {
+        console.log(`toLoginPage`);
+        $('#searchPage').hide()
+        $('#loginPage').show()
+    })
+    $('#loginForm').on('submit', (event) => {
+        console.log('submit login form')
+        login()
+        event.preventDefault()
+    })
 })
 
 // YOUTUBE_API_KEY=AIzaSyArcX7Ict6UnR7rd0uc_D4LZZmygIVlE38
