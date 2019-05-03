@@ -101,12 +101,47 @@ function getVidLyr(trackId, title, query) {
     })
 }
 
+function showEventSearch() {
+    event.preventDefault()
+    $('#musicsearch').hide()
+    $('#maxdiv').show()
+}
+
+function searchUpcoming(event) {
+    event.preventDefault()
+
+    const output = $("#upcoming-search").serializeArray()
+    console.log(output)
+
+    $.ajax({
+        url: "http://localhost:3000/upcoming",
+        method: "POST",
+        data: output
+
+    })
+    .done((response) => {
+        for(event of response) {
+            $("#upcoming-list").append(
+                `<div class="fetchedItems" style="margin-bottom: 0.8rem; padding: 8px; background-color: #e4e1d8; font-size: 0.85rem;" class="container"><h5 style="font-size: 1rem; margin-bottom: 0.4rem;">${event.displayName}</h5>&nbsp;&nbsp;&nbsp;&nbsp;Artists: ${event.artists}<br>&nbsp;&nbsp;&nbsp;&nbsp;Start date: ${event.startDate}<br>&nbsp;&nbsp;&nbsp;&nbsp;Venue: ${event.venue}<br>&nbsp;&nbsp;&nbsp;&nbsp;City: ${event.city}<br></div>`
+            )
+        }
+    })
+    .fail((jqXHR, textStatus) => {
+        console.log("Failed", textStatus)
+    })
+}
 
 $(document).ready(function () {
+    $('#maxdiv').hide()
+
     $('#search-music').submit(function () {
         search()
     })
 
+    $("#upcoming-search").submit(function(event) {
+        $(".fetchedItems").remove()
+        searchUpcoming(event);
+    })
 })
 
 // YOUTUBE_API_KEY=AIzaSyArcX7Ict6UnR7rd0uc_D4LZZmygIVlE38
