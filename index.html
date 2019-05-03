@@ -25,7 +25,10 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto text-light">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a id="music-page" class="nav-link" href="#">Search Music <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a id="event-page" onclick="showEventSearch();" class="nav-link" href="#">Find Upcoming Events<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
             <span class="navbar-text">
@@ -34,7 +37,7 @@
             <a href="#" onclick="signOut();">Sign out</a>
         </div>
     </nav>
-    <div class="container-fluid">
+    <div id="musicsearch" class="container-fluid">
         <div class="row">
             <div class="col-5 mt-4">
                 <div class="card">
@@ -65,7 +68,29 @@
                 </div>
             </div>
         </div>
-
+    </div>
+    <div id="maxdiv">
+        <div class="container">
+            <form id="upcoming-search" action="./upcoming" method="get">
+                    <h4 style="margin-bottom: 0.9rem; margin-top: 0.6rem;">Find Upcoming Events:</h4>
+                    
+                    Select a city:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <select style="margin-bottom: 0.8rem;" name="city" form="upcoming-search">
+                        <option value="bangkok">Bangkok, Thailand</option>
+                        <option value="jakarta" selected>Jakarta, Indonesia</option>
+                        <option value="kualalumpur">Kuala Lumpur, Malaysia</option>
+                        <option value="melbourne">Melbourne, Australia</option>
+                        <option value="singapore">Singapore, Singapore</option>
+                        <option value="surabaya">Surabaya, Indonesia</option>
+                        <option value="sydney">Sydney, Australia</option>
+                        <option value="tokyo">Tokyo, Japan</option>
+                    </select><br>
+                    Minimum Date:&nbsp;&nbsp;&nbsp;&nbsp;<input style="margin-bottom: 0.8rem;" type="date" name="mindate" min="2019-05-04"><br>
+                    Maximum Date:&nbsp;&nbsp;&nbsp;&nbsp;<input style="margin-bottom: 0.6rem;" type="date" name="maxdate" min="2019-05-05"><br>
+                    <input style="margin-bottom: 0.6rem;" type="submit" value="Search"><br>
+            </form>
+        </div>
+        <div id="upcoming-list" class="container"></div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
